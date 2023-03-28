@@ -24,11 +24,16 @@ public class MainActivity extends AppCompatActivity {
     EditText etNewLetter;
     ImageView ivState;
     Game game;
+    String name;
+    TextView userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        name = getIntent().getStringExtra("DATA_NAME");
+
 
 //        here is a good place to implement MVVM if someone is interested
 
@@ -39,8 +44,12 @@ public class MainActivity extends AppCompatActivity {
         lettersChosen = findViewById(R.id.tvLettersChosen);
         etNewLetter = findViewById(R.id.etNewLetter);
         ivState = findViewById(R.id.ivState);
+        userName = findViewById(R.id.userName);
+
+        userName.setText("User: " + name);
 
 //        starting game mechanics
+        //System.out.println("My name is: " + name);
         startGame();
     }
 

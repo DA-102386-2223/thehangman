@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class IniciActivity extends AppCompatActivity {
 
     Button startGameButton;
+    EditText editTextName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,12 +18,18 @@ public class IniciActivity extends AppCompatActivity {
         setContentView(R.layout.activity_inici);
 
         startGameButton = findViewById(R.id.startGameButton);
-        startGameButton.setOnClickListener(v -> startGame());
+        startGameButton.setOnClickListener(v -> startGameActivity());
+        editTextName = findViewById(R.id.editTextName);
     }
 
-    public void startGame(){
-        Intent i = new Intent(this, MainActivity.class);
-        startActivity(i);
-        finish();
+    public void startGameActivity(){
+        if (!editTextName.getText().toString().equals("")) {
+            String name = editTextName.getText().toString();
+            Intent i = new Intent(this, MainActivity.class);
+            i.putExtra("DATA_NAME", name);
+            startActivity(i);
+        } else {
+            editTextName.setText("Name");
+        }
     }
 }
