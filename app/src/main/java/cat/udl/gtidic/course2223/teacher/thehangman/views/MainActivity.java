@@ -1,9 +1,10 @@
-package cat.udl.gtidic.course2223.teacher.thehangman;
+package cat.udl.gtidic.course2223.teacher.thehangman.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import cat.udl.gtidic.course2223.teacher.thehangman.R;
+import cat.udl.gtidic.course2223.teacher.thehangman.models.Game;
+import cat.udl.gtidic.course2223.teacher.thehangman.views.IniciActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,11 +28,16 @@ public class MainActivity extends AppCompatActivity {
     EditText etNewLetter;
     ImageView ivState;
     Game game;
+    String name;
+    TextView userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        name = getIntent().getStringExtra("DATA_NAME");
+
 
 //        here is a good place to implement MVVM if someone is interested
 
@@ -37,8 +48,12 @@ public class MainActivity extends AppCompatActivity {
         lettersChosen = findViewById(R.id.tvLettersChosen);
         etNewLetter = findViewById(R.id.etNewLetter);
         ivState = findViewById(R.id.ivState);
+        userName = findViewById(R.id.userName);
+
+        userName.setText("User: " + name);
 
 //        starting game mechanics
+        //System.out.println("My name is: " + name);
         startGame();
     }
 
@@ -80,6 +95,14 @@ public class MainActivity extends AppCompatActivity {
         int validLetter = game.addLetter(novaLletra);
         if (validLetter != Game.LETTER_VALIDATION_OK){
             Log.d(Game.TAG, "Lletra no vàlida");
+            Context context = getApplicationContext();
+            int duration = Toast.LENGTH_LONG;
+            if (validLetter == Game.LETTER_VALIDATION_NO_VALID_BECAUSE_ALREADY_SELECTED){
+                Toast toast1 = Toast.makeText(context, "Ja has seleccionat aquest caràcter!", duration);
+                toast1.show();
+            } else {
+                Toast toast1 = Toast.makeText(context, "Has de ficar un caràcter!", duration);
+                toast1.show();            }
         }
         Log.d(Game.TAG, "Estat actual: " + game.getCurrentRound());
 
@@ -94,13 +117,25 @@ public class MainActivity extends AppCompatActivity {
     private void checkGameOver(){
         if (game.isPlayerTheWinner()){
             Log.d(Game.TAG, "El jugador ha guanyat!");
+            finishActivityGame();
         }
 
         if (game.isGameOver()){
             Log.d(Game.TAG, "El Joc ha acabat");
             btnNewLetter.setEnabled(false);
             etNewLetter.setEnabled(false);
+            finishActivityGame();
         }
+    }
+
+    /**
+     * Métode per anar a l'activity IniciActivity
+     */
+
+    public void finishActivityGame(){
+        //Intent i = new Intent(this, IniciActivity.class);
+        //startActivity(i);
+        finish();
     }
 
     /**

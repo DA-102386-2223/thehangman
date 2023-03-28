@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">El Ahorcado</string>
+    <string name="LettersSelected">Letras ya seleccionadas:</string>
+    <string name="WordToDiscover">Palabra a descubrir:</string>
+    <string name="newLetter">Nueva letra</string>
+    <string name="startGameButton">Empezar Juego</string>
+</resources>
