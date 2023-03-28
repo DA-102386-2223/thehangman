@@ -1,7 +1,9 @@
-package cat.udl.gtidic.course2223.teacher.thehangman;
+package cat.udl.gtidic.course2223.teacher.thehangman.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -13,22 +15,36 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import cat.udl.gtidic.course2223.teacher.thehangman.R;
+import cat.udl.gtidic.course2223.teacher.thehangman.models.Game;
+import cat.udl.gtidic.course2223.teacher.thehangman.viewmodels.GameViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
     Button btnNewLetter;
     TextView visibleWord;
     TextView lettersChosen;
+    TextView tvUsername;
     EditText etNewLetter;
     ImageView ivState;
     Game game;
+    GameViewModel gameViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Bundle bundle = getIntent().getExtras();
+        String username = bundle.getString("username");
+
 //        here is a good place to implement MVVM if someone is interested
+        gameViewModel = new ViewModelProvider(this).get(GameViewModel.class);
 
 //        initializing views
         btnNewLetter = findViewById(R.id.btnNewLetter);
@@ -37,6 +53,13 @@ public class MainActivity extends AppCompatActivity {
         lettersChosen = findViewById(R.id.tvLettersChosen);
         etNewLetter = findViewById(R.id.etNewLetter);
         ivState = findViewById(R.id.ivState);
+        tvUsername = findViewById(R.id.tvUsername);
+
+        tvUsername.append(username);
+
+        gameViewModel.getVisibleWordLD().observe(this, val -> {
+            visibleWord.setText(val);
+        });
 
 //        starting game mechanics
         startGame();
@@ -65,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
      * Actualitza les views de la pantalla
      */
     private void refreshWords(){
-        visibleWord.setText(game.visibleWord());
+        game.visibleWord();
         lettersChosen.setText(game.lettersChosen());
         ivState.setImageDrawable(getDrawableFromState(game.getCurrentRound()));
     }
@@ -78,8 +101,14 @@ public class MainActivity extends AppCompatActivity {
         etNewLetter.setText("");
 
         int validLetter = game.addLetter(novaLletra);
-        if (validLetter != Game.LETTER_VALIDATION_OK){
+        if (validLetter == Game.LETTER_VALIDATION_NO_VALID_BECAUSE_SIZE){
             Log.d(Game.TAG, "Lletra no vàlida");
+            Toast.makeText(this, "Has introduit més d'una lletra!", Toast.LENGTH_SHORT).show();
+        } else if (validLetter == Game.LETTER_VALIDATION_NO_VALID_BECAUSE_ALREADY_SELECTED){
+            Log.d(Game.TAG, "Lletra ja escollida");
+            Toast.makeText(this, "La lletra ja ha estat escollida!", Toast.LENGTH_SHORT).show();
+        } else if (validLetter == Game.LETTER_VALIDATION_OK){
+            Log.d(Game.TAG, "Lletra vàlida");
         }
         Log.d(Game.TAG, "Estat actual: " + game.getCurrentRound());
 
@@ -94,12 +123,14 @@ public class MainActivity extends AppCompatActivity {
     private void checkGameOver(){
         if (game.isPlayerTheWinner()){
             Log.d(Game.TAG, "El jugador ha guanyat!");
+            finish();
         }
 
         if (game.isGameOver()){
             Log.d(Game.TAG, "El Joc ha acabat");
             btnNewLetter.setEnabled(false);
             etNewLetter.setEnabled(false);
+            finish();
         }
     }
 
@@ -107,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
      * Inicia el joc i actualitza l'activitat
      */
     private void startGame(){
-        game = new Game();
+        game = gameViewModel.getGame();
         refreshWords();
     }
 

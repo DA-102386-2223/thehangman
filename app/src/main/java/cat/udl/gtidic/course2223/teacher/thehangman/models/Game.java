@@ -1,6 +1,11 @@
-package cat.udl.gtidic.course2223.teacher.thehangman;
+package cat.udl.gtidic.course2223.teacher.thehangman.models;
 
 import android.util.Log;
+
+import androidx.lifecycle.MutableLiveData;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +13,9 @@ import java.util.Random;
 
 public class Game {
     public static final String TAG = "Parcial";
+
+    private final FirebaseDatabase database = FirebaseDatabase.getInstance("https://examenandroid-56390-default-rtdb.europe-west1.firebasedatabase.app/");
+
 
     String[] possibleWords = {"Xiuxiuejar", "Aixopluc", "Caliu", "Tendresa", "Llibertat", "Moixaina", "Amanyagar", "Enraonar", "Ginesta", "Atzavara"};
     List<String> lettersChosen = new ArrayList<>();
@@ -27,6 +35,8 @@ public class Game {
     Boolean playerWon;
     String lettersChosenStr;
 
+    private MutableLiveData<String> visibleWordLD = new MutableLiveData<>();
+
     /**
      * Inicialitza el joc escollint la paraula secreta
      */
@@ -35,6 +45,10 @@ public class Game {
         secretWord = possibleWords[random];
         secretWord = secretWord.toUpperCase();
         Log.d(TAG, "He creat un nou game amb la paraula a descobrir: " + secretWord);
+    }
+
+    public MutableLiveData<String> getVisibleWordLD() {
+        return visibleWordLD;
     }
 
     /**
@@ -48,6 +62,7 @@ public class Game {
             wordToReturn += lettersChosen.contains(s) ? s : "_";
             wordToReturn += " ";
         }
+        visibleWordLD.setValue(wordToReturn);
         return wordToReturn;
     }
 
@@ -58,10 +73,22 @@ public class Game {
     public boolean isGameOver() {
         if (currentRound >= LAST_ROUND){
             playerWon = false;
+            saveToDB();
             return true;
         }
-        if (isPlayerTheWinner()) return true;
+        if (isPlayerTheWinner()) {
+            saveToDB();
+            return true;
+        }
         return false;
+    }
+
+    private void saveToDB() {
+        DatabaseReference myRef = database.getReference("examen");
+        myRef.child("secretWord").setValue(secretWord);
+        myRef.child("currentRound").setValue(currentRound);
+        myRef.child("playerWon").setValue(playerWon);
+        myRef.child("lettersChosenStr").setValue(lettersChosenStr);
     }
 
     /**
