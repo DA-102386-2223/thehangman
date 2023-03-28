@@ -48,6 +48,7 @@ public class Game {
             wordToReturn += lettersChosen.contains(s) ? s : "_";
             wordToReturn += " ";
         }
+        System.out.println("Retorna aixo:" + wordToReturn);
         return wordToReturn;
     }
 

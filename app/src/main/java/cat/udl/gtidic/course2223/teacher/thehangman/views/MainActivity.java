@@ -2,6 +2,8 @@ package cat.udl.gtidic.course2223.teacher.thehangman;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -13,20 +15,26 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
+    private GameViewModel game;
     Button btnNewLetter;
     TextView visibleWord;
     TextView lettersChosen;
     EditText etNewLetter;
     ImageView ivState;
-    Game game;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        String nomJugador = getIntent().getStringExtra("EXTRA_NAME_ID");
+        TextView nomj = (TextView) findViewById(R.id.nomjugador);
+        nomj.setText(nomJugador);
 
 //        here is a good place to implement MVVM if someone is interested
 
@@ -39,7 +47,10 @@ public class MainActivity extends AppCompatActivity {
         ivState = findViewById(R.id.ivState);
 
 //        starting game mechanics
-        startGame();
+        game = new ViewModelProvider(this).get(GameViewModel.class);
+        GameViewModel binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        binding.setGameViewModel(game);
+        binding.setLifecycleOwner(this);
     }
 
     /**
@@ -79,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
         int validLetter = game.addLetter(novaLletra);
         if (validLetter != Game.LETTER_VALIDATION_OK){
+            Toast.makeText(this, "Lletra no vàlida, ja l'has introduïda", Toast.LENGTH_SHORT).show();
             Log.d(Game.TAG, "Lletra no vàlida");
         }
         Log.d(Game.TAG, "Estat actual: " + game.getCurrentRound());
@@ -107,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
      * Inicia el joc i actualitza l'activitat
      */
     private void startGame(){
-        game = new Game();
+        startGame();
         refreshWords();
     }
 
