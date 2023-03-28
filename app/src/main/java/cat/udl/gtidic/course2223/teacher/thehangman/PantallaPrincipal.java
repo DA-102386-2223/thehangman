@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class PantallaPrincipal extends AppCompatActivity {
 
@@ -30,6 +31,8 @@ public class PantallaPrincipal extends AppCompatActivity {
 
                 }
             });
+            //guarda el nombre del jugador y lo imprime en la pantalla de juego
+
 
 
         }

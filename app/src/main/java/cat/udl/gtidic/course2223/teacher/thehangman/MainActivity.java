@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     ImageView ivState;
     Game game;
 
+    TextView nameTextView;
+
 
 
     @Override
@@ -128,6 +130,18 @@ public class MainActivity extends AppCompatActivity {
         game = new Game();
         refreshWords();
     }
+    //muestra el texto introducido en el edittext con un viewtext
+    private void mostrarNom(){
+        String nom = etNewLetter.getText().toString();
+        visibleWord.setText(nom);
+    }
+    //inicializa mostrarNom
+    private void mostrarNom(View view){
+        view = findViewById(R.id.nameTextView);
+        mostrarNom(view);
+    }
+
+
 
     /* -------- METODES AUXILIARS --------- */
 
