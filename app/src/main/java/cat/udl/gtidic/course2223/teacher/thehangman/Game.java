@@ -1,6 +1,8 @@
 package cat.udl.gtidic.course2223.teacher.thehangman;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,7 +94,9 @@ public class Game {
      * @return true si la lletra es valida
      */
     public int addLetter(String letter){
+
         if (letter.length() != 1) return LETTER_VALIDATION_NO_VALID_BECAUSE_SIZE;
+
         if (!isNewLetter(letter)) return LETTER_VALIDATION_NO_VALID_BECAUSE_ALREADY_SELECTED;
 
         lettersChosen.add(letter.toUpperCase());
@@ -103,6 +107,11 @@ public class Game {
 
         return LETTER_VALIDATION_OK;
     }
+
+    private Context getAplicationContext() {
+        return null;
+    }
+
 
     /**
      * retorna si es una lletra nova descoberta o no
