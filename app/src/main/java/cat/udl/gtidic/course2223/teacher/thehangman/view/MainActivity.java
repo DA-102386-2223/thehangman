@@ -1,9 +1,11 @@
-package cat.udl.gtidic.course2223.teacher.thehangman;
+package cat.udl.gtidic.course2223.teacher.thehangman.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -16,11 +18,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import cat.udl.gtidic.course2223.teacher.thehangman.R;
+import cat.udl.gtidic.course2223.teacher.thehangman.model.Game;
+import cat.udl.gtidic.course2223.teacher.thehangman.viewmodel.ActivityGameBinding;
+import cat.udl.gtidic.course2223.teacher.thehangman.viewmodel.GameViewModel;
+
+public class MainActivity extends AppCompatActivity{
 
     String userName;
 
-
+    private GameViewModel gameViewModel;
     Button btnNewLetter;
     TextView visibleWord;
     TextView lettersChosen;
@@ -49,12 +56,16 @@ public class MainActivity extends AppCompatActivity {
         playerNameText = findViewById(R.id.playerName);
         // collecting data from Intent - Bundle from previous Activity
         Bundle extra = getIntent().getExtras();
-            String nomJugador = extra.getString("nomdelJugador");
-            Log.d(Game.TAG, "Nom del jugador: " + nomJugador);
-            playerNameText.setText(nomJugador);
-            Toast.makeText(this, nomJugador, Toast.LENGTH_LONG).show();
-
+        String nomJugador = extra.getString("nomdelJugador");
+        Log.d(Game.TAG, "Nom del jugador: " + nomJugador);
+        playerNameText.setText(nomJugador);
+        Toast.makeText(this, nomJugador, Toast.LENGTH_LONG).show();
 //        starting game mechanics
+        gameViewModel = new ViewModelProvider(this).get(GameViewModel.class);
+        Activity DataBindingUtil = null;
+        //ActivityGameBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        //binding.setGameViewModel(game);
+        //binding.setLifecycleOwner(this);
         startGame();
     }
 
@@ -92,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
     private void newLetter(){
         String novaLletra = etNewLetter.getText().toString().toUpperCase();
         etNewLetter.setText("");
+
 
         int validLetter = game.addLetter(novaLletra);
         String errorAMostrar = "";

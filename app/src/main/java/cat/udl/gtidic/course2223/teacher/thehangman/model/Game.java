@@ -1,4 +1,4 @@
-package cat.udl.gtidic.course2223.teacher.thehangman;
+package cat.udl.gtidic.course2223.teacher.thehangman.model;
 
 import android.util.Log;
 import android.widget.Toast;
@@ -32,11 +32,21 @@ public class Game {
      * Inicialitza el joc escollint la paraula secreta
      */
     public Game(){
+        //Ho deixo així de moment, no sé si arribo a temps.
+        //TODO: Eliminar segons MVVM.
         int random = new Random().nextInt(possibleWords.length);
         secretWord = possibleWords[random];
         secretWord = secretWord.toUpperCase();
         Log.d(TAG, "He creat un nou game amb la paraula a descobrir: " + secretWord);
     }
+
+    public void init() {
+        int random = new Random().nextInt(possibleWords.length);
+        secretWord = possibleWords[random];
+        secretWord = secretWord.toUpperCase();
+        Log.d(TAG, "He creat un nou game amb la paraula a descobrir: " + secretWord);
+    }
+
 
     /**
      * Construeix la lletra visible per ser consumida des de la view
@@ -105,6 +115,18 @@ public class Game {
         return LETTER_VALIDATION_OK;
     }
 
+    public int addLetterMVVM(String letter){
+        if (letter.length() != 1) return LETTER_VALIDATION_NO_VALID_BECAUSE_SIZE;
+        if (!isNewLetter(letter)) return LETTER_VALIDATION_NO_VALID_BECAUSE_ALREADY_SELECTED;
+
+        lettersChosen.add(letter.toUpperCase());
+        if (!isALetterExpected(letter)) currentRound++;
+
+        lettersChosenStr = lettersChosen.toString();
+        Log.d(TAG, lettersChosenStr);
+
+        return LETTER_VALIDATION_OK;
+    }
     /**
      * retorna si es una lletra nova descoberta o no
      * @param letter String amb la nova lletra
@@ -129,4 +151,6 @@ public class Game {
     public int getCurrentRound() {
         return currentRound;
     }
+
+
 }

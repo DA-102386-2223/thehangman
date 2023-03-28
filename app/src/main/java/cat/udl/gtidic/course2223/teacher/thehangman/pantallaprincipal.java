@@ -4,8 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.EditText;
+
+import cat.udl.gtidic.course2223.teacher.thehangman.view.MainActivity;
 
 public class pantallaprincipal extends AppCompatActivity {
 
