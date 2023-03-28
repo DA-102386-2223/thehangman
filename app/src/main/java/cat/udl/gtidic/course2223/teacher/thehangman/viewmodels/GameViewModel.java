@@ -8,15 +8,26 @@ import cat.udl.gtidic.course2223.teacher.thehangman.models.Game;
 
 public class GameViewModel extends ViewModel {
 
+    private Game internalGame;
     private MutableLiveData<Game> game = new MutableLiveData<>();
 
     public GameViewModel(){
-        Game internalGame = new Game();
+        internalGame = new Game();
         game.setValue(internalGame);
     }
 
     public LiveData<Game> getGame(){
         return game;
+    }
+
+    public Game GetGameI()
+    {
+        return internalGame;
+    }
+
+    public void newLetterVM() {
+        Game myGame = game.getValue();
+        game.setValue(myGame);
     }
 
 }
