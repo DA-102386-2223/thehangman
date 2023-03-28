@@ -12,7 +12,10 @@
         android:theme="@style/Theme.TheHangman"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".view.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pantallaprincipal"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
