@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    String userName;
+
     Button btnNewLetter;
     TextView visibleWord;
     TextView lettersChosen;
@@ -92,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             }
             Toast toast = Toast.makeText(getApplicationContext(),errorAMostrar, Toast.LENGTH_SHORT);
             toast.show();
-            Log.d(Game.TAG, "Lletra no vàlida");
+            Log.d(Game.TAG, errorAMostrar);
         }
         Log.d(Game.TAG, "Estat actual: " + game.getCurrentRound());
 
@@ -107,13 +109,17 @@ public class MainActivity extends AppCompatActivity {
     private void checkGameOver(){
         if (game.isPlayerTheWinner()){
             Log.d(Game.TAG, "El jugador ha guanyat!");
+            Toast toast = Toast.makeText(getApplicationContext(), "Has guanyat!", Toast.LENGTH_SHORT);
+            toast.show();
         }
 
         if (game.isGameOver()){
             Log.d(Game.TAG, "El Joc ha acabat");
             btnNewLetter.setEnabled(false);
             etNewLetter.setEnabled(false);
+            finish();
         }
+
     }
 
     /**
