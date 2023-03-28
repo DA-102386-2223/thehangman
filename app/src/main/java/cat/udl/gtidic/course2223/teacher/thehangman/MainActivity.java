@@ -3,6 +3,7 @@ package cat.udl.gtidic.course2223.teacher.thehangman;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -19,15 +20,18 @@ public class MainActivity extends AppCompatActivity {
 
     String userName;
 
+
     Button btnNewLetter;
     TextView visibleWord;
     TextView lettersChosen;
     EditText etNewLetter;
     ImageView ivState;
+    TextView playerNameText;
     Game game;
     public static final int LETTER_VALIDATION_NO_VALID_BECAUSE_SIZE = 1;
     public static final int LETTER_VALIDATION_NO_VALID_BECAUSE_ALREADY_SELECTED = 2;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +46,13 @@ public class MainActivity extends AppCompatActivity {
         lettersChosen = findViewById(R.id.tvLettersChosen);
         etNewLetter = findViewById(R.id.etNewLetter);
         ivState = findViewById(R.id.ivState);
+        playerNameText = findViewById(R.id.playerName);
+        // collecting data from Intent - Bundle from previous Activity
+        Bundle extra = getIntent().getExtras();
+            String nomJugador = extra.getString("nomdelJugador");
+            Log.d(Game.TAG, "Nom del jugador: " + nomJugador);
+            playerNameText.setText(nomJugador);
+            Toast.makeText(this, nomJugador, Toast.LENGTH_LONG).show();
 
 //        starting game mechanics
         startGame();

@@ -42,15 +42,29 @@
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
     <TextView
+        android:id="@+id/tvVisibleWordText2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/playerName"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvLettersChosenText"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toBottomOf="@+id/tvVisibleWord" />
+
+    <TextView
         android:id="@+id/tvVisibleWord"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textSize="24sp"
-        tools:text="_ A _ A"
         app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@+id/tvVisibleWordText" />
+        app:layout_constraintTop_toBottomOf="@+id/tvVisibleWordText"
+        tools:text="_ A _ A" />
 
     <TextView
         android:id="@+id/tvLettersChosenText"
@@ -127,5 +141,15 @@
         tools:text="A"
         android:autofillHints=""
         android:textAllCaps="true"/>
+
+    <TextView
+        android:id="@+id/playerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/playerNameHere"
+        app:layout_constraintBottom_toBottomOf="@+id/tvLettersChosenText"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toTopOf="@+id/tvVisibleWordText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

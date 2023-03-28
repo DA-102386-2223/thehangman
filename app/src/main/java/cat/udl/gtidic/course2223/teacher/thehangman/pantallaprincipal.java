@@ -5,18 +5,28 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class pantallaprincipal extends AppCompatActivity {
 
+    EditText userName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantallaprincipal);
         findViewById(R.id.buttonStart).setOnClickListener(v-> startGame());
-       // findViewById(R.id.btLogin).setOnClickListener(v -> login());
+        userName = findViewById(R.id.editTextTextPersonName);
     }
     private void startGame(){
         Intent intent = new Intent(pantallaprincipal.this, MainActivity.class);
+        String name = userName.getText().toString().trim();
+        if(name.isEmpty()){
+            userName.setError("El nom és requerit.");
+            userName.requestFocus();
+            return;
+        }
+        intent.putExtra("nomdelJugador", name);
         startActivity(intent);
     }
+
 }
