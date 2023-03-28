@@ -1,6 +1,8 @@
 package cat.udl.gtidic.course2223.teacher.thehangman;
 
 import android.util.Log;
+import android.widget.Toast;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +15,8 @@ public class Game {
     List<String> lettersChosen = new ArrayList<>();
     String secretWord;
     private final int LAST_ROUND = 7;
+
+    private boolean gameOver = false;
 
 //    incrementa l'estat del joc (del penjat)
     public int currentRound = 0;
@@ -35,6 +39,15 @@ public class Game {
         secretWord = possibleWords[random];
         secretWord = secretWord.toUpperCase();
         Log.d(TAG, "He creat un nou game amb la paraula a descobrir: " + secretWord);
+
+    }
+
+    public void onGameOver(){
+        gameOver = true;
+        finish();
+    }
+
+    private void finish() {
     }
 
     /**
