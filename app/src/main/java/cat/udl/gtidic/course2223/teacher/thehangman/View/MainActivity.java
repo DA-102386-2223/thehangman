@@ -20,6 +20,7 @@ import cat.udl.gtidic.course2223.teacher.thehangman.R;
 public class MainActivity extends AppCompatActivity {
 
     Button btnNewLetter;
+    EditText name;
     TextView visibleWord;
     TextView lettersChosen;
     EditText etNewLetter;
@@ -43,6 +44,11 @@ public class MainActivity extends AppCompatActivity {
 
 //        starting game mechanics
         startGame();
+    }
+    private void getName(){
+        name = findViewById(R.id.et_nom);
+        String nameString = name.getText().toString();
+        game.setName(nameString);
     }
 
     /**

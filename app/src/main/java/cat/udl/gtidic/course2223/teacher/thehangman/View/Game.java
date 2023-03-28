@@ -14,6 +14,7 @@ public class Game {
     String[] possibleWords = {"Xiuxiuejar", "Aixopluc", "Caliu", "Tendresa", "Llibertat", "Moixaina", "Amanyagar", "Enraonar", "Ginesta", "Atzavara"};
     List<String> lettersChosen = new ArrayList<>();
     String secretWord;
+    String name;
     private final int LAST_ROUND = 7;
 
 //    incrementa l'estat del joc (del penjat)
@@ -140,5 +141,13 @@ public class Game {
      */
     public int getCurrentRound() {
         return currentRound;
+    }
+
+    public void setName(String nameString) {
+        this.StartActivity = StartActivity;
+
+    }
+    public void getName(String nameString) {
+        this.name = nameString;
     }
 }

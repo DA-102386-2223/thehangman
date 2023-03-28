@@ -6,4 +6,5 @@
     <string name="start_game">Start Game</string>
     <string name="editText_name">Introduce tu nombre</string>
     <string name="valor">No se ha introducido ningún valor</string>
+    <string name="nom_jugador">Usuari:</string>
 </resources>
