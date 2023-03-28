@@ -1,6 +1,8 @@
-package cat.udl.gtidic.course2223.teacher.thehangman;
+package cat.udl.gtidic.course2223.teacher.thehangman.View;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +28,7 @@ public class Game {
 //    estan pensants per poder ésser persists fàcilment
     Boolean playerWon;
     String lettersChosenStr;
+    private Context StartActivity;
 
     /**
      * Inicialitza el joc escollint la paraula secreta
@@ -92,8 +95,18 @@ public class Game {
      * @return true si la lletra es valida
      */
     public int addLetter(String letter){
-        if (letter.length() != 1) return LETTER_VALIDATION_NO_VALID_BECAUSE_SIZE;
-        if (!isNewLetter(letter)) return LETTER_VALIDATION_NO_VALID_BECAUSE_ALREADY_SELECTED;
+        if (letter.length() != 1) {
+            // Toast per indicar que la lletra no es vàlida.
+            Toast.makeText(StartActivity, "Introduce un valor", Toast.LENGTH_SHORT).show();
+            return LETTER_VALIDATION_NO_VALID_BECAUSE_SIZE;
+        }
+
+        if (!isNewLetter(letter)){
+            // Toast per indicar que la lletra ja ha estat escollida.
+            Toast.makeText(StartActivity, "Already selected", Toast.LENGTH_SHORT).show();
+            return LETTER_VALIDATION_NO_VALID_BECAUSE_ALREADY_SELECTED;
+
+        }
 
         lettersChosen.add(letter.toUpperCase());
         if (!isALetterExpected(letter)) currentRound++;
