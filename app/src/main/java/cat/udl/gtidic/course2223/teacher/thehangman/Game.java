@@ -1,6 +1,7 @@
 package cat.udl.gtidic.course2223.teacher.thehangman;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;

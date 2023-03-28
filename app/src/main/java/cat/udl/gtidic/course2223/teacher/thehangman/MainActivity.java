@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     EditText etNewLetter;
     ImageView ivState;
     Game game;
+    public static final int LETTER_VALIDATION_NO_VALID_BECAUSE_SIZE = 1;
+    public static final int LETTER_VALIDATION_NO_VALID_BECAUSE_ALREADY_SELECTED = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +81,17 @@ public class MainActivity extends AppCompatActivity {
         etNewLetter.setText("");
 
         int validLetter = game.addLetter(novaLletra);
+        String errorAMostrar = "";
         if (validLetter != Game.LETTER_VALIDATION_OK){
+            errorAMostrar = "Lletra no vàlida";
+            if(validLetter==LETTER_VALIDATION_NO_VALID_BECAUSE_ALREADY_SELECTED){
+                errorAMostrar+= " perquè ja ha estat seleccionada anteriorment";
+            }
+            else if(validLetter==LETTER_VALIDATION_NO_VALID_BECAUSE_SIZE){
+                errorAMostrar+= " per el seu tamany";
+            }
+            Toast toast = Toast.makeText(getApplicationContext(),errorAMostrar, Toast.LENGTH_SHORT);
+            toast.show();
             Log.d(Game.TAG, "Lletra no vàlida");
         }
         Log.d(Game.TAG, "Estat actual: " + game.getCurrentRound());
