@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">The Hangman</string>
+    <string name="LettersSelected">Letras ya seleccionadas:</string>
+    <string name="WordToDiscover">Palabra a descubrir:</string>
+    <string name="newLetter">Nueva letra</string>
+    <string name="startGame">Iniciar juego</string>
+    <string name="yourNameInput">Pon tu nombre aquí</string>
+    <string name="putYourNameHere">Pon tu nombre aquí</string>
+    <string name="playerName">Nombre:</string>
+    <string name="playerNameHere">NombreJugador</string>
+</resources>
