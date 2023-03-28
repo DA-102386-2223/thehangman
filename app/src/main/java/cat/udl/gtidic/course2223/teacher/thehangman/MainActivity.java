@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -82,6 +83,14 @@ public class MainActivity extends AppCompatActivity {
         int validLetter = game.addLetter(novaLletra);
         if (validLetter != Game.LETTER_VALIDATION_OK){
             Log.d(Game.TAG, "Lletra no vàlida");
+            if (validLetter == Game.LETTER_VALIDATION_NO_VALID_BECAUSE_SIZE){
+                Toast toast = Toast.makeText(this, "Introdueix només una lletra", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+            if (validLetter == Game.LETTER_VALIDATION_NO_VALID_BECAUSE_ALREADY_SELECTED){
+                Toast toast = Toast.makeText(this, "Aquesta lletra ja ha estat triada", Toast.LENGTH_SHORT);
+                toast.show();
+            }
         }
         Log.d(Game.TAG, "Estat actual: " + game.getCurrentRound());
 

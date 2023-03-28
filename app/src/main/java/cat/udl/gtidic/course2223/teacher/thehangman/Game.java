@@ -128,17 +128,4 @@ public class Game {
     public int getCurrentRound() {
         return currentRound;
     }
-
-    //informa amb un toast quan la lletra escollida no es valida
-
-    public String getToastMessage(int validationCode){
-        switch (validationCode){
-            case LETTER_VALIDATION_NO_VALID_BECAUSE_SIZE:
-                return "Lletra incorrecta";
-            case LETTER_VALIDATION_NO_VALID_BECAUSE_ALREADY_SELECTED:
-                return "Aquesta lletra ja ha estat escollida";
-            default:
-                return "";
-        }
-    }
 }
