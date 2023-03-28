@@ -107,7 +107,9 @@ public class MainActivity extends AppCompatActivity {
      * Inicia el joc i actualitza l'activitat
      */
     private void startGame(){
-        game = new Game();
+
+        game = new Game(this, R.layout.activity_main);
+
         refreshWords();
     }
 
