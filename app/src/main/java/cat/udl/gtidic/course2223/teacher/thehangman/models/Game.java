@@ -1,36 +1,49 @@
-package cat.udl.gtidic.course2223.teacher.thehangman;
+package cat.udl.gtidic.course2223.teacher.thehangman.models;
 
 import android.util.Log;
+
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+@Entity
 public class Game {
+    @PrimaryKey(autoGenerate = true)
+    public long id;
+    @Ignore
     public static final String TAG = "Parcial";
-
+    @Ignore
     String[] possibleWords = {"Xiuxiuejar", "Aixopluc", "Caliu", "Tendresa", "Llibertat", "Moixaina", "Amanyagar", "Enraonar", "Ginesta", "Atzavara"};
+    @Ignore
     List<String> lettersChosen = new ArrayList<>();
-    String secretWord;
+    public String secretWord;
+    @Ignore
     private final int LAST_ROUND = 7;
 
 //    incrementa l'estat del joc (del penjat)
     public int currentRound = 0;
 
 //    constants per controlar si la lletra a afegir és vàlida o no
+    @Ignore
     public static final int LETTER_VALIDATION_OK = 0;
+    @Ignore
     public static final int LETTER_VALIDATION_NO_VALID_BECAUSE_SIZE = 1;
+    @Ignore
     public static final int LETTER_VALIDATION_NO_VALID_BECAUSE_ALREADY_SELECTED = 2;
 
 //    atributs que no mostra el game però que si que actualitza
 //    estan pensants per poder ésser persists fàcilment
-    Boolean playerWon;
-    String lettersChosenStr;
+    public Boolean playerWon;
+    public String lettersChosenStr;
 
     /**
      * Inicialitza el joc escollint la paraula secreta
      */
-    public Game(){
+    public void init (){
         int random = new Random().nextInt(possibleWords.length);
         secretWord = possibleWords[random];
         secretWord = secretWord.toUpperCase();
@@ -48,6 +61,7 @@ public class Game {
             wordToReturn += lettersChosen.contains(s) ? s : "_";
             wordToReturn += " ";
         }
+        System.out.println("Retorna aixo:" + wordToReturn);
         return wordToReturn;
     }
 

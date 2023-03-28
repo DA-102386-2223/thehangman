@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">eL Juego x no me acuerdo</string>
+    <string name="LettersSelected">Cartas ya selecionadas</string>
+    <string name="WordToDiscover">Paraules a descobrir</string>
+    <string name="newLetter">Nueva letra</string>
+    <string name="StartGame">Iniciar partida</string>
+    <string name="NameOfPlayer">Nombre del Jugador</string>
+    <string name="PlayerName">Nom del Jugador</string>
+</resources>
