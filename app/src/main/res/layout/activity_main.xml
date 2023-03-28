@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".View.MainActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineLeft"
@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="32dp" />
+        app:layout_constraintGuide_percent="0.92214113" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineHalf"
@@ -71,10 +71,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textSize="24sp"
-        tools:text="B, A, E, P"
         app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@+id/tvLettersChosenText" />
+        app:layout_constraintTop_toBottomOf="@+id/tvLettersChosenText"
+        tools:text="B, A, E, P" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
@@ -112,20 +112,47 @@
 
     <EditText
         android:id="@+id/etNewLetter"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="164dp"
+        android:layout_height="58dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:autofillHints=""
         android:ems="10"
         android:gravity="center"
         android:inputType="text"
         android:maxLength="1"
+        android:textAllCaps="true"
         app:layout_constraintBottom_toBottomOf="@+id/btnNewLetter"
         app:layout_constraintEnd_toStartOf="@+id/guidelineHalf"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
         app:layout_constraintTop_toTopOf="@+id/btnNewLetter"
-        tools:text="A"
-        android:autofillHints=""
-        android:textAllCaps="true"/>
+        tools:text="A" />
+
+    <EditText
+        android:id="@+id/et_nom"
+        android:layout_width="224dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="21dp"
+        android:text="@{gameViewModel.game.playerName}"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/etNewLetter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvLettersChosen"
+        app:layout_constraintVertical_bias="1.0"
+        tools:text="Carlos" />
+
+    <TextView
+        android:id="@+id/txt_nom_jugador"
+        android:layout_width="107dp"
+        android:layout_height="27dp"
+        android:text="@string/nom_jugador"
+        app:layout_constraintBottom_toTopOf="@+id/etNewLetter"
+        app:layout_constraintEnd_toStartOf="@+id/et_nom"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toBottomOf="@+id/tvLettersChosen"
+        app:layout_constraintVertical_bias="0.363" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
