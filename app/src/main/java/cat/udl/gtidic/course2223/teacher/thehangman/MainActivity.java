@@ -3,7 +3,9 @@ package cat.udl.gtidic.course2223.teacher.thehangman;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,9 +15,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    Button button;
     Button btnNewLetter;
     TextView visibleWord;
     TextView lettersChosen;
@@ -28,19 +32,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        here is a good place to implement MVVM if someone is interested
-
-//        initializing views
         btnNewLetter = findViewById(R.id.btnNewLetter);
-        btnNewLetter.setOnClickListener(v -> newLetter());
+        btnNewLetter.setOnClickListener(view -> newLetter());
         visibleWord = findViewById(R.id.tvVisibleWord);
         lettersChosen = findViewById(R.id.tvLettersChosen);
         etNewLetter = findViewById(R.id.etNewLetter);
         ivState = findViewById(R.id.ivState);
 
-//        starting game mechanics
+        String username = getIntent().getExtras().getString("user");
+        TextView tvUser = findViewById(R.id.tvUser);
+        tvUser.setText("usuari: " + username);
         startGame();
     }
+
+//        here is a good place to implement MVVM if someone is interested
+
+//        initializing views
 
     /**
      * Retorna el Drawable segons l'estat correcte
@@ -80,6 +87,14 @@ public class MainActivity extends AppCompatActivity {
         int validLetter = game.addLetter(novaLletra);
         if (validLetter != Game.LETTER_VALIDATION_OK){
             Log.d(Game.TAG, "Lletra no vàlida");
+            if (validLetter == Game.LETTER_VALIDATION_NO_VALID_BECAUSE_SIZE){
+                Toast toast = Toast.makeText(this, "Introdueix només una lletra", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+            if (validLetter == Game.LETTER_VALIDATION_NO_VALID_BECAUSE_ALREADY_SELECTED){
+                Toast toast = Toast.makeText(this, "Aquesta lletra ja ha estat triada", Toast.LENGTH_SHORT);
+                toast.show();
+            }
         }
         Log.d(Game.TAG, "Estat actual: " + game.getCurrentRound());
 
@@ -94,12 +109,16 @@ public class MainActivity extends AppCompatActivity {
     private void checkGameOver(){
         if (game.isPlayerTheWinner()){
             Log.d(Game.TAG, "El jugador ha guanyat!");
+            Intent intent = new Intent(MainActivity.this, StartActivity.class);
+            startActivity(intent);
         }
 
         if (game.isGameOver()){
             Log.d(Game.TAG, "El Joc ha acabat");
             btnNewLetter.setEnabled(false);
             etNewLetter.setEnabled(false);
+            Intent intent = new Intent(MainActivity.this, StartActivity.class);
+            startActivity(intent);
         }
     }
 

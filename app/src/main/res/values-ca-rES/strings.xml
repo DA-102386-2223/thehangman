@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">The Hangman</string>
+    <string name="LettersSelected">Lletres seleccionades:</string>
+    <string name="WordToDiscover">Paraula a esbrinar:</string>
+    <string name="newLetter">Nova lletra</string>
+    <string name="button_startGame">Iniciar Partida</string>
+</resources>
