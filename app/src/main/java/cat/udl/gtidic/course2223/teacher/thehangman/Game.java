@@ -1,6 +1,7 @@
 package cat.udl.gtidic.course2223.teacher.thehangman;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -64,11 +65,22 @@ public class Game {
     public boolean isGameOver() {
         if (currentRound >= LAST_ROUND){
             playerWon = false;
+            // Crear intent para abrir la actividad del menú
+            Intent intent = new Intent(context, Menu.class);
+            // Iniciar la actividad del menú
+            context.startActivity(intent);
             return true;
         }
-        if (isPlayerTheWinner()) return true;
+        if (isPlayerTheWinner()) {
+            // Crear intent para abrir la actividad del menú
+            Intent intent = new Intent(context, Menu.class);
+            // Iniciar la actividad del menú
+            context.startActivity(intent);
+            return true;
+        }
         return false;
     }
+
 
     /**
      * Busca si totes les lletres de la paraula a resoldre han estat insertades

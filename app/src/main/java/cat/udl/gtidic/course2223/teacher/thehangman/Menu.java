@@ -14,17 +14,17 @@ public class Menu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-
-        Button next = (Button) findViewById(R.id.button);
-
-        next.setOnClickListener(new View.OnClickListener() {
+        Button startGameButton = findViewById(R.id.button);
+        startGameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(), MainActivity.class);
-
-                startActivityForResult(myIntent, 0);
+                Intent intent = new Intent(Menu.this, MainActivity.class);
+                startActivity(intent);
 
             }
-
         });
+
+
+
     }
 }
