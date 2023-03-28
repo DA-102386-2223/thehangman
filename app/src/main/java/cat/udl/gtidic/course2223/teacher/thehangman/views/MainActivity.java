@@ -1,4 +1,4 @@
-package cat.udl.gtidic.course2223.teacher.thehangman;
+package cat.udl.gtidic.course2223.teacher.thehangman.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -17,16 +17,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import cat.udl.gtidic.course2223.teacher.thehangman.models.Game;
+import cat.udl.gtidic.course2223.teacher.thehangman.viewmodels.GameViewModel;
+import cat.udl.gtidic.course2223.teacher.thehangman.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    private GameViewModel game;
+    //private GameViewModel game;
     Button btnNewLetter;
     TextView visibleWord;
     TextView lettersChosen;
     EditText etNewLetter;
     ImageView ivState;
+    Game game;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +50,11 @@ public class MainActivity extends AppCompatActivity {
         ivState = findViewById(R.id.ivState);
 
 //        starting game mechanics
-        game = new ViewModelProvider(this).get(GameViewModel.class);
+        /*game = new ViewModelProvider(this).get(GameViewModel.class);
         GameViewModel binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setGameViewModel(game);
-        binding.setLifecycleOwner(this);
+        binding.setLifecycleOwner(this);*/
+        startGame();
     }
 
     /**
@@ -119,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
      * Inicia el joc i actualitza l'activitat
      */
     private void startGame(){
-        startGame();
+        game = new Game();
         refreshWords();
     }
 

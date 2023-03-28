@@ -1,4 +1,4 @@
-package cat.udl.gtidic.course2223.teacher.thehangman;
+package cat.udl.gtidic.course2223.teacher.thehangman.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import cat.udl.gtidic.course2223.teacher.thehangman.R;
 
 public class Iniciar extends AppCompatActivity {
     String nom = "";

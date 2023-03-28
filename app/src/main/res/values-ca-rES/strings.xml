@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">El joc x</string>
+    <string name="LettersSelected">Cartes ja selecionades</string>
+    <string name="WordToDiscover">Palabras a descubrir</string>
+    <string name="newLetter">NovA LLETRA</string>
+    <string name="StartGame">Iniciar partida</string>
+    <string name="NameOfPlayer">Nom del Jugador</string>
+    <string name="PlayerName">Nom del Jugador</string>
+</resources>
