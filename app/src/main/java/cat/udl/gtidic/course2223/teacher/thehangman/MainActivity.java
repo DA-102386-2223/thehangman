@@ -38,6 +38,10 @@ public class MainActivity extends AppCompatActivity {
         lettersChosen = findViewById(R.id.tvLettersChosen);
         etNewLetter = findViewById(R.id.etNewLetter);
         ivState = findViewById(R.id.ivState);
+
+        String username = getIntent().getExtras().getString("user");
+        TextView tvUser = findViewById(R.id.tvUser);
+        tvUser.setText("usuari: " + username);
         startGame();
     }
 
