@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -103,13 +104,25 @@ public class MainActivity extends AppCompatActivity {
     private void checkGameOver(){
         if (game.isPlayerTheWinner()){
             Log.d(Game.TAG, "El jugador ha guanyat!");
+            finishActivityGame();
         }
 
         if (game.isGameOver()){
             Log.d(Game.TAG, "El Joc ha acabat");
             btnNewLetter.setEnabled(false);
             etNewLetter.setEnabled(false);
+            finishActivityGame();
         }
+    }
+
+    /**
+     * Métode per anar a l'activity IniciActivity
+     */
+
+    public void finishActivityGame(){
+        Intent i = new Intent(this, IniciActivity.class);
+        startActivity(i);
+        finish();
     }
 
     /**
