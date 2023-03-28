@@ -90,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
         if (validLetter == Game.LETTER_VALIDATION_NO_LETTER){
             toastNoLletra();
         }
+
+
         Log.d(Game.TAG, "Estat actual: " + game.getCurrentRound());
 
         refreshWords();
@@ -110,6 +112,13 @@ public class MainActivity extends AppCompatActivity {
             btnNewLetter.setEnabled(false);
             etNewLetter.setEnabled(false);
         }
+        if (game.isGameOver() && game.isPlayerTheWinner()){
+            backToPantallaPrincipal();
+        }
+    }
+
+    private void backToPantallaPrincipal() {
+        setContentView(R.layout.activity_pantalla_principal);
     }
 
     /**
@@ -143,5 +152,10 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "No has introduit cap lletra", Toast.LENGTH_SHORT).show();
 
     }
+
+
+
+
+
 
 }
