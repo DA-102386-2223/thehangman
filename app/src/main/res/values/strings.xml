@@ -3,4 +3,7 @@
     <string name="LettersSelected">Letters already selected:</string>
     <string name="WordToDiscover">Word to discover:</string>
     <string name="newLetter">New letter</string>
+    <string name="start_game">Start Game</string>
+    <string name="editText_name">Introduce tu nombre</string>
+    <string name="valor">No se ha introducido ningún valor</string>
 </resources>

@@ -1,9 +1,10 @@
-package cat.udl.gtidic.course2223.teacher.thehangman;
+package cat.udl.gtidic.course2223.teacher.thehangman.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import cat.udl.gtidic.course2223.teacher.thehangman.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -98,8 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (game.isGameOver()){
             Log.d(Game.TAG, "El Joc ha acabat");
-            btnNewLetter.setEnabled(false);
-            etNewLetter.setEnabled(false);
+            endGame();
         }
     }
 
@@ -123,5 +125,11 @@ public class MainActivity extends AppCompatActivity {
             InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
+    }
+    private void endGame(){
+        btnNewLetter.setEnabled(false);
+        etNewLetter.setEnabled(false);
+        Intent intent = new Intent(this, StartActivity.class);
+        startActivity(intent);
     }
 }

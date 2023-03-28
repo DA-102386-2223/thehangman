@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".View.MainActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineLeft"
@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="32dp" />
+        app:layout_constraintGuide_percent="0.92214113" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineHalf"
@@ -112,20 +112,20 @@
 
     <EditText
         android:id="@+id/etNewLetter"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="164dp"
+        android:layout_height="58dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:autofillHints=""
         android:ems="10"
         android:gravity="center"
         android:inputType="text"
         android:maxLength="1"
+        android:textAllCaps="true"
         app:layout_constraintBottom_toBottomOf="@+id/btnNewLetter"
         app:layout_constraintEnd_toStartOf="@+id/guidelineHalf"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
         app:layout_constraintTop_toTopOf="@+id/btnNewLetter"
-        tools:text="A"
-        android:autofillHints=""
-        android:textAllCaps="true"/>
+        tools:text="A" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
