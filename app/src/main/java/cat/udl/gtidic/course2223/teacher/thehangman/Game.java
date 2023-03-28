@@ -1,6 +1,7 @@
 package cat.udl.gtidic.course2223.teacher.thehangman;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +9,8 @@ import java.util.Random;
 
 public class Game {
     public static final String TAG = "Parcial";
+    public static final int LETTER_VALIDATION_REPEATED = 2;
+    public static final int LETTER_VALIDATION_NO_LETTER = 1;
 
     String[] possibleWords = {"Xiuxiuejar", "Aixopluc", "Caliu", "Tendresa", "Llibertat", "Moixaina", "Amanyagar", "Enraonar", "Ginesta", "Atzavara"};
     List<String> lettersChosen = new ArrayList<>();
@@ -128,4 +131,18 @@ public class Game {
     public int getCurrentRound() {
         return currentRound;
     }
+
+
+//con un toast muestra un mensaje por patalla que la letra no es valida o que ya ha sido escogida
+    public String getLetterValidationMessage(int letterValidationCode){
+        switch (letterValidationCode){
+            case LETTER_VALIDATION_NO_VALID_BECAUSE_SIZE:
+                return "La lletra no és vàlida perquè no és una lletra";
+            case LETTER_VALIDATION_NO_VALID_BECAUSE_ALREADY_SELECTED:
+                return "La lletra no és vàlida perquè ja ha estat escollida";
+            default:
+                return "Error desconegut";
+        }
+    }
+
 }

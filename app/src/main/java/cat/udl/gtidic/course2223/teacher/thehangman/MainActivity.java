@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     EditText etNewLetter;
     ImageView ivState;
     Game game;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +84,12 @@ public class MainActivity extends AppCompatActivity {
         if (validLetter != Game.LETTER_VALIDATION_OK){
             Log.d(Game.TAG, "Lletra no vàlida");
         }
+        if (validLetter == Game.LETTER_VALIDATION_REPEATED){
+            toastRepetida();
+        }
+        if (validLetter == Game.LETTER_VALIDATION_NO_LETTER){
+            toastNoLletra();
+        }
         Log.d(Game.TAG, "Estat actual: " + game.getCurrentRound());
 
         refreshWords();
@@ -124,4 +133,15 @@ public class MainActivity extends AppCompatActivity {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
+
+    //toast que mostri per pantalla quan hem introduit una lletra repetida
+    private void toastRepetida(){
+        Toast.makeText(this, "Lletra repetida", Toast.LENGTH_SHORT).show();
+
+    }//toast que mostri per pantalla quan no hem introduit cap lletra
+    private void toastNoLletra(){
+        Toast.makeText(this, "No has introduit cap lletra", Toast.LENGTH_SHORT).show();
+
+    }
+
 }
