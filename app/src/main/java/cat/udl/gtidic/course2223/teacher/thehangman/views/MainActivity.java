@@ -1,4 +1,4 @@
-package cat.udl.gtidic.course2223.teacher.thehangman;
+package cat.udl.gtidic.course2223.teacher.thehangman.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -15,6 +15,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import cat.udl.gtidic.course2223.teacher.thehangman.R;
+import cat.udl.gtidic.course2223.teacher.thehangman.models.Game;
+import cat.udl.gtidic.course2223.teacher.thehangman.views.IniciActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -129,8 +133,8 @@ public class MainActivity extends AppCompatActivity {
      */
 
     public void finishActivityGame(){
-        Intent i = new Intent(this, IniciActivity.class);
-        startActivity(i);
+        //Intent i = new Intent(this, IniciActivity.class);
+        //startActivity(i);
         finish();
     }
 
