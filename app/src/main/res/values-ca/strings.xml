@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">The Hangman</string>
+    <string name="LettersSelected">Lletres ja escollides:</string>
+    <string name="WordToDiscover">Paraula per descobrir:</string>
+    <string name="newLetter">Nova lletra</string>
+    <string name="usernameTooltip">Escriu el teu nom!</string>
+    <string name="usernameError">Has d\'escriure el teu nom!</string>
+</resources>
