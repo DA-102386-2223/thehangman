@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -80,6 +81,14 @@ public class MainActivity extends AppCompatActivity {
         int validLetter = game.addLetter(novaLletra);
         if (validLetter != Game.LETTER_VALIDATION_OK){
             Log.d(Game.TAG, "Lletra no vàlida");
+            Context context = getApplicationContext();
+            int duration = Toast.LENGTH_LONG;
+            if (validLetter == Game.LETTER_VALIDATION_NO_VALID_BECAUSE_ALREADY_SELECTED){
+                Toast toast1 = Toast.makeText(context, "Ja has seleccionat aquest caràcter!", duration);
+                toast1.show();
+            } else {
+                Toast toast1 = Toast.makeText(context, "Has de ficar un caràcter!", duration);
+                toast1.show();            }
         }
         Log.d(Game.TAG, "Estat actual: " + game.getCurrentRound());
 
